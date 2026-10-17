@@ -127,21 +127,28 @@
   </section>
 
   <!-- CERTIFICATIONS -->
-  <section id="certifications" class="section">
+    <section id="certifications" class="section">
     <p class="section-label">~/certifications</p>
     <h2>Certifications</h2>
+    <p class="cert-intro">Click "View certificate" to see the full certificate.</p>
     <div class="cert-grid">
 
       <div class="cert-card">
+        <span class="cert-issuer">Simplilearn SkillUP</span>
         <h3>Introduction to Cyber Security</h3>
         <p class="cert-date">Course completion · 14 Oct 2026</p>
         <p class="cert-id">Certificate code: 10891678</p>
+        <button class="cert-view" type="button" data-pdf="certificates/cyber-security.pdf" data-title="Introduction to Cyber Security">View certificate</button>
+        <a class="cert-pdf" href="certificates/cyber-security.pdf" target="_blank" rel="noopener">Open PDF</a>
       </div>
 
       <div class="cert-card">
+        <span class="cert-issuer">Simplilearn SkillUP</span>
         <h3>Angular Basics</h3>
         <p class="cert-date">Course completion · 12 Oct 2026</p>
         <p class="cert-id">Certificate code: 10879970</p>
+        <button class="cert-view" type="button" data-pdf="certificates/angular-basics.pdf" data-title="Angular Basics">View certificate</button>
+        <a class="cert-pdf" href="certificates/angular-basics.pdf" target="_blank" rel="noopener">Open PDF</a>
       </div>
 
       <div class="cert-card">
@@ -149,6 +156,8 @@
         <h3>Ethical Hacker</h3>
         <p class="cert-date">Course completion · 12 Aug 2026</p>
         <p class="cert-desc">Penetration testing methodology, vulnerability scanning, network and application exploitation, and writing pentest reports.</p>
+        <button class="cert-view" type="button" data-pdf="certificates/ethical-hacker.pdf" data-title="Ethical Hacker">View certificate</button>
+        <a class="cert-pdf" href="certificates/ethical-hacker.pdf" target="_blank" rel="noopener">Open PDF</a>
       </div>
 
       <div class="cert-card">
@@ -156,6 +165,8 @@
         <h3>Python Essentials 1</h3>
         <p class="cert-date">Course completion · 15 May 2025</p>
         <p class="cert-desc">Writing, debugging and refactoring Python 3 programs, and thinking algorithmically to solve problems.</p>
+        <button class="cert-view" type="button" data-pdf="certificates/python-essentials-1.pdf" data-title="Python Essentials 1">View certificate</button>
+        <a class="cert-pdf" href="certificates/python-essentials-1.pdf" target="_blank" rel="noopener">Open PDF</a>
       </div>
 
       <div class="cert-card">
@@ -163,7 +174,12 @@
         <h3>Computer Hardware Basics</h3>
         <p class="cert-date">Course completion · 14 May 2025</p>
         <p class="cert-desc">Building, repairing and upgrading PCs, preventive maintenance, laptops and mobile devices.</p>
+        <button class="cert-view" type="button" data-pdf="certificates/computer-hardware-basics.pdf" data-title="Computer Hardware Basics">View certificate</button>
+        <a class="cert-pdf" href="certificates/computer-hardware-basics.pdf" target="_blank" rel="noopener">Open PDF</a>
       </div>
+
+    </div>
+  </section>
 
     </div>
   </section>
@@ -213,18 +229,15 @@
 
     <form class="contact-form" id="contact-form"
           action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" required>
-
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" required>
-
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-
-      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
-      <button type="submit" class="btn btn-primary">Send message</button>
-      <p class="form-status" id="form-status" role="status"></p>
+      <div class="terminal-bar"><span></span><span></span><span></span><em>send-message.sh</em></div>
+      <div class="terminal-body">
+        <label class="t-line"><span class="prompt">name &gt;</span><input name="name" type="text" required autocomplete="name"></label>
+        <label class="t-line"><span class="prompt">email &gt;</span><input name="email" type="email" required autocomplete="email"></label>
+        <label class="t-line"><span class="prompt">message &gt;</span><textarea name="message" rows="4" required></textarea></label>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none">
+        <button type="submit" class="t-send">$ ./send</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </div>
     </form>
 
     <div class="socials" style="margin-top: 2rem;">
@@ -237,7 +250,41 @@
     <p>© 2026 Thando Mavuso — built with HTML, CSS & JS.</p>
   </footer>
 
+    <!-- CERTIFICATE VIEWER -->
+  <div class="cert-modal" id="cert-modal" role="dialog" aria-modal="true" aria-label="Certificate viewer" hidden>
+    <div class="cert-modal-inner">
+      <button class="cert-close" id="cert-close" type="button" aria-label="Close">&times;</button>
+      <iframe id="cert-frame" src="" title="Certificate"></iframe>
+      <p id="cert-modal-title"></p>
+    </div>
+  </div>
+
   <script src="js/script.js"></script>
+    <script>
+    const modal = document.getElementById('cert-modal');
+    const frame = document.getElementById('cert-frame');
+    const modalTitle = document.getElementById('cert-modal-title');
+    function openCert(pdf, title) {
+      frame.src = pdf;
+      frame.title = title + ' certificate';
+      modalTitle.textContent = title;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('cert-close').focus();
+    }
+    function closeCert() {
+      modal.hidden = true;
+      frame.src = '';
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.cert-view').forEach(function (b) {
+      b.addEventListener('click', function () { openCert(b.dataset.pdf, b.dataset.title); });
+    });
+    document.getElementById('cert-close').addEventListener('click', closeCert);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeCert(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeCert(); });
+  </script>
+
   <script>
     const form = document.getElementById('contact-form');
     const statusEl = document.getElementById('form-status');

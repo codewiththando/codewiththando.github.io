@@ -1,12 +1,12 @@
 :root {
-  --bg: #0a0f1a;
-  --bg-alt: #0f1626;
-  --card: #121b2e;
-  --text: #e6eaf2;
-  --muted: #8592a8;
-  --accent: #5a8fc0;
-  --accent-2: #7c85c9;
-  --accent-soft: rgba(90, 143, 192, 0.14);
+  --bg: #050805;
+  --bg-alt: #0a100b;
+  --card: #0d140e;
+  --text: #e6efe8;
+  --muted: #7d9183;
+  --accent: #2fbf71;
+  --accent-2: #8fe3b0;
+  --accent-soft: rgba(47, 191, 113, 0.12);
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'IBM Plex Sans', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
@@ -33,7 +33,7 @@ h1, h2, h3 { font-family: var(--font-heading); }
   padding: 1.4rem 6%;
   position: sticky;
   top: 0;
-  background: rgba(10, 15, 26, 0.88);
+  background: rgba(5, 8, 5, 0.9);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
   z-index: 100;
@@ -113,9 +113,9 @@ h1, h2, h3 { font-family: var(--font-heading); }
 }
 .btn-primary {
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #0a0f1a;
+  color: #050805;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(90,143,192,0.25); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(47,191,113,0.25); }
 .btn-outline {
   border: 1px solid rgba(255,255,255,0.15);
   color: var(--text);
@@ -241,13 +241,61 @@ h1, h2, h3 { font-family: var(--font-heading); }
   font-size: 0.8rem;
   margin-top: 0.6rem;
 }
-.cert-card a {
-  display: inline-block;
+.cert-intro { color: var(--muted); margin: -1rem 0 1.5rem; font-size: 0.95rem; }
+.cert-thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 1rem;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: border-color 0.2s;
+}
+.cert-thumb:hover { border-color: var(--accent); }
+.cert-thumb img { display: block; width: 100%; height: auto; }
+.cert-view {
   margin-top: 0.9rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   color: var(--accent);
-  text-decoration: none;
   font-family: var(--font-mono);
   font-size: 0.85rem;
+}
+.cert-view:hover { color: var(--accent-2); }
+.cert-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 4, 2, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 200;
+}
+.cert-modal[hidden] { display: none; }
+.cert-modal-inner { position: relative; max-width: 1000px; width: 100%; text-align: center; }
+.cert-modal-inner img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.cert-modal-inner p { margin-top: 0.8rem; color: var(--muted); font-family: var(--font-mono); font-size: 0.9rem; }
+.cert-close {
+  position: absolute;
+  top: -2.6rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 /* PROJECTS */
@@ -309,44 +357,75 @@ h1, h2, h3 { font-family: var(--font-heading); }
 }
 .socials a:hover { border-color: var(--accent); color: var(--accent-2); }
 
-/* CONTACT FORM */
+/* CONTACT FORM (terminal style) */
 .contact-form {
-  display: grid;
-  gap: 0.5rem;
-  max-width: 560px;
+  max-width: 620px;
   margin-top: 2rem;
-}
-.contact-form label {
+  background: #020402;
+  border: 1px solid rgba(47,191,113,0.25);
+  border-radius: 10px;
+  overflow: hidden;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  box-shadow: 0 0 40px rgba(47,191,113,0.06);
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  background: var(--bg-alt);
+  border-bottom: 1px solid rgba(47,191,113,0.18);
+}
+.terminal-bar span {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.14);
+}
+.terminal-bar span:first-child { background: var(--accent); }
+.terminal-bar em {
+  margin-left: 0.6rem;
+  font-style: normal;
+  font-size: 0.8rem;
   color: var(--muted);
-  margin-top: 0.6rem;
 }
-.contact-form input,
-.contact-form textarea {
-  background: var(--card);
-  color: var(--text);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 6px;
-  padding: 0.8rem 1rem;
-  font: inherit;
-  resize: vertical;
+.terminal-body { padding: 1.4rem 1.4rem 1.2rem; display: grid; gap: 1rem; }
+.t-line {
+  display: flex;
+  gap: 0.8rem;
+  align-items: baseline;
+  border-bottom: 1px dashed rgba(47,191,113,0.22);
+  padding-bottom: 0.5rem;
+  transition: border-color 0.2s;
 }
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
-}
-.contact-form button {
-  margin-top: 1rem;
-  justify-self: start;
+.t-line:focus-within { border-bottom-color: var(--accent); }
+.prompt { color: var(--accent); font-size: 0.9rem; white-space: nowrap; min-width: 5.2rem; }
+.t-line input,
+.t-line textarea {
+  flex: 1;
+  background: transparent;
   border: none;
-  cursor: pointer;
+  outline: none;
+  color: var(--text);
+  caret-color: var(--accent);
   font: inherit;
-  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0;
+  resize: none;
 }
-.form-status { color: var(--accent); font-size: 0.9rem; min-height: 1.4em; }
+.t-send {
+  justify-self: start;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.t-send:hover { background: var(--accent); color: #050805; }
+.form-status { color: var(--accent-2); font-size: 0.85rem; min-height: 1.3em; }
 
 footer {
   text-align: center;
