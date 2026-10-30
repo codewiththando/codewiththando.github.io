@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thando Mavuso | Software Developer</title>
+    <script>
+    try { if (localStorage.getItem('theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+  </script>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -21,7 +24,10 @@
       <li><a href="#projects">projects</a></li>
       <li><a href="#contact">contact</a></li>
     </ul>
-    <div class="burger"><div></div><div></div><div></div></div>
+        <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">☀️</button>
+      <div class="burger"><div></div><div></div><div></div></div>
+    </div>
   </nav>
 
 <!-- HERO -->
@@ -30,6 +36,7 @@
       <p class="eyebrow">~/thando$ whoami</p>
       <h1>Thando Mavuso</h1>
       <h2>Software Developer</h2>
+      <p class="motto">“Driven by curiosity, focused on creating impact.”</p>
       <p class="hero-desc">Final-year BSc IT student at North-West University, building applications in Java, C#, and SQL. Seeking a Software Developer Internship or Junior Developer role, and open to relocating for the right opportunity.</p>
       <div class="hero-buttons">
         <a href="#contact" class="btn btn-primary">Get in Touch</a>

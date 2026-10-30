@@ -469,3 +469,77 @@ footer {
     justify-content: center;
   }
 }
+/* ===== THEME TOGGLE + LIGHT THEME ===== */
+:root { color-scheme: dark; }
+
+body { transition: background 0.25s, color 0.25s; }
+
+.nav-actions { display: flex; align-items: center; gap: 1rem; }
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--text);
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.theme-toggle:hover { background: var(--accent-soft); transform: rotate(15deg); }
+
+.motto {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--accent-2);
+  border-left: 3px solid var(--accent);
+  padding-left: 0.75rem;
+  margin: -0.6rem 0 1.4rem;
+}
+
+/* Certificate viewer: the modal uses an iframe, so give it a size */
+.cert-modal-inner iframe {
+  width: 100%;
+  height: 80vh;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* Light theme colors */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f6f9f7;
+  --bg-alt: #e9f1ec;
+  --card: #ffffff;
+  --text: #0f1a13;
+  --muted: #526358;
+  --accent: #0b5e2e;
+  --accent-2: #12793f;
+  --accent-soft: rgba(11, 94, 46, 0.1);
+}
+
+/* Light theme: values that were hard-coded for dark */
+:where([data-theme="light"]) .navbar { background: rgba(255, 255, 255, 0.9); border-bottom-color: rgba(0, 0, 0, 0.08); }
+:where([data-theme="light"]) .nav-links { border-left-color: rgba(0, 0, 0, 0.08); }
+:where([data-theme="light"]) .section { border-top-color: rgba(0, 0, 0, 0.08); }
+:where([data-theme="light"]) .skill,
+:where([data-theme="light"]) .project-card { border-color: rgba(0, 0, 0, 0.1); }
+:where([data-theme="light"]) .cert-card {
+  border-left-color: rgba(0, 0, 0, 0.1);
+  border-right-color: rgba(0, 0, 0, 0.1);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+:where([data-theme="light"]) .btn-outline,
+:where([data-theme="light"]) .socials a { border-color: rgba(0, 0, 0, 0.2); }
+:where([data-theme="light"]) .btn-primary { color: #ffffff; }
+:where([data-theme="light"]) .t-send:hover { color: #ffffff; }
+:where([data-theme="light"]) .contact-form { background: #f1f6f3; }
+:where([data-theme="light"]) .terminal-bar span { background: rgba(0, 0, 0, 0.15); }
+:where([data-theme="light"]) .cert-modal { background: rgba(255, 255, 255, 0.94); }
+
+@media (max-width: 768px) {
+  .motto { border-left: none; padding-left: 0; }
+}
