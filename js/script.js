@@ -23,7 +23,6 @@ const themeToggle = document.getElementById('theme-toggle');
 
 function updateToggle() {
   const isLight = root.getAttribute('data-theme') === 'light';
-  themeToggle.textContent = isLight ? '🌙' : '☀️';
   themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
 }
 

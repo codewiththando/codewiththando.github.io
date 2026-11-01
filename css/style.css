@@ -477,18 +477,35 @@ body { transition: background 0.25s, color 0.25s; }
 .nav-actions { display: flex; align-items: center; gap: 1rem; }
 
 .theme-toggle {
-  background: transparent;
-  border: 1px solid var(--accent);
-  color: var(--text);
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.6rem;
+  height: 2.6rem;
   border-radius: 50%;
-  font-size: 1rem;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: var(--text);
+  color: var(--bg);
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, background 0.25s, color 0.25s;
 }
-.theme-toggle:hover { background: var(--accent-soft); transform: rotate(15deg); }
+.theme-toggle:hover { transform: scale(1.08); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+
+.theme-toggle svg { width: 1.2rem; height: 1.2rem; }
+.icon-moon { display: none; fill: currentColor; }
+.icon-sun {
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+:root[data-theme="light"] .icon-moon { display: block; }
+:root[data-theme="light"] .icon-sun { display: none; }
 
 .motto {
   font-family: var(--font-mono);
